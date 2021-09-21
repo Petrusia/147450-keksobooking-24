@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Petras Blaževičius](https://up.htmlacademy.ru/javascript/24/user/147450).
-* Наставник: [Максим Деев](https://htmlacademy.ru/profile/id685777).
+* Наставник: [Максим Деев] (https://htmlacademy.ru/profile/id685777).
 
 ---
 
