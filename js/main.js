@@ -1,7 +1,7 @@
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 function getRandInt(valueFrom, valueTo) {
   // Определить, является ли аргумент конечным числом
-  if (!Number.isFinite(valueFrom) ||  !Number.isFinite(valueTo) ) {
+  if (!Number.isFinite(valueFrom) || !Number.isFinite(valueTo)) {
     throw new Error('Значения должны быть числом');
   }
   // диапазон может быть только положительный, включая ноль
@@ -20,7 +20,7 @@ function getRandInt(valueFrom, valueTo) {
 // Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно
 function getRandFloat(valueFrom, valueTo, digitsAfterComma = 0) {
   // Определить, является ли аргумент конечным числом
-  if (!Number.isFinite(valueFrom) ||  !Number.isFinite(valueTo) ||  !Number.isFinite(digitsAfterComma) ) {
+  if (!Number.isFinite(valueFrom) || !Number.isFinite(valueTo) || !Number.isFinite(digitsAfterComma)) {
     throw new Error('Значения должны быть числом');
   }
   // диапазон может быть только положительный, включая ноль
