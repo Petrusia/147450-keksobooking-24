@@ -29,12 +29,13 @@ function getRandFloat(valueFrom, valueTo, digitsAfterComma = 0) {
   if (valueFrom === valueTo) {
     throw new Error('Значения не должны быть равными');
   }
+
+  digitsAfterComma = Math.floor(digitsAfterComma);
   // Количество цифр после десятичной запятой; может быть значением между 0 и 20 включительно,
   // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
   if (digitsAfterComma < 0 || digitsAfterComma > 20) {
     throw new Error('Значения может быть значением между 0 и 20 включительно');
   }
-  digitsAfterComma = Math.floor(digitsAfterComma);
   // если передать значение «до» меньшее, чем значение «от»
   const [min, max] = valueFrom > valueTo ? [valueTo, valueFrom] : [valueFrom, valueTo];
   const result = Math.random() * (max - min) + min;
