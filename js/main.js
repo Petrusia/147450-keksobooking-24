@@ -1,3 +1,4 @@
+// Функция, возвращающая случайное целое число из переданного диапазона включительно.
 function getRandInt(valueFrom, valueTo) {
   // Определить, является ли аргумент конечным числом
   if (!Number.isFinite(valueFrom) ||  !Number.isFinite(valueTo) ) {
@@ -16,6 +17,7 @@ function getRandInt(valueFrom, valueTo) {
   return Math.floor((Math.random() * (max - min + 1)) + min);
 }
 
+// Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно
 function getRandFloat(valueFrom, valueTo, digitsAfterComma = 0) {
   // Определить, является ли аргумент конечным числом
   if (!Number.isFinite(valueFrom) ||  !Number.isFinite(valueTo) ||  !Number.isFinite(digitsAfterComma) ) {
