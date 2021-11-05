@@ -3,7 +3,7 @@ import { AVATARS, TITLES, PRICE_MIN, PRICE_MAX, TYPES, ROOMS_MIN, ROOMS_MAX, GUE
 import {getRandomPositiveFloat} from './get-random-positive-float';
 import {getRandomPositiveInteger} from './get-random-positive-integer';
 
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(1, elements.length - 1)];
 const getRangeRandomArrayElements = (elements) => elements.slice(0, getRandomArrayElement(elements));
 
 const getAuthor = () => (
