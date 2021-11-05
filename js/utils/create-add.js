@@ -4,9 +4,8 @@ import {getRandomPositiveFloat} from './get-random-positive-float';
 import {getRandomPositiveInteger} from './get-random-positive-integer';
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+const getRangeRandomArrayElements = (elements) => elements.slice(0, getRandomArrayElement(elements));
 
-
-const getFeatures = (features) => features.slice(0, getRandomArrayElement(features));
 const getAuthor = () => (
   {
     avatar: getRandomArrayElement(AVATARS),
@@ -30,9 +29,9 @@ const getOffer = () => (
     guests: getRandomPositiveInteger(GUESTS_MIN, GUESTS_MAX),
     checkin: getRandomArrayElement(CHECKINS),
     checkout: getRandomArrayElement(CHECKOUTS),
-    features: getFeatures(FEATURES),
+    features: getRangeRandomArrayElements(FEATURES),
     description: getRandomArrayElement(DESCRIPTIONS),
-    photos: PHOTOS.slice(0, getRandomArrayElement(PHOTOS)),
+    photos: getRangeRandomArrayElements(PHOTOS),
   }
 );
 
