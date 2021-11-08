@@ -35,10 +35,12 @@ const getOffer = () => (
   }
 );
 
-export const generateAddData = () => (
+const createAddData = () => (
   {
     author: getAuthor(),
     offer: getOffer(),
     location: getLocation(),
   }
 );
+
+export const generateAdsData = (adsNumber) => Array.from({length: adsNumber}, createAddData);
