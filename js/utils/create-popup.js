@@ -57,7 +57,7 @@ export const createPopup = (adsData) => {
   const photosContainer = adsElement.querySelector('.popup__photos');
   photosContainer.innerHTML = '';
   photosContainer.appendChild(getAdsPhotos(adsData.offer.photos));
-  for (let index = 0; index < adsElement.children.length; index++) {
+  for (let index = 1; index < adsElement.children.length; index++) {
     if (!adsElement.children[index].innerHTML) {
       adsElement.children[index].remove();
     }
