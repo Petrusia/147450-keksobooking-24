@@ -1,5 +1,5 @@
 import {generateAddData} from './utils/generate-add-data';
-import {createPopup} from './utils/create-ads';
+import {createPopup} from './utils/create-popup';
 
 const ADS_NUMBER = 10;
 const adsData = Array.from({length: ADS_NUMBER}, generateAddData);

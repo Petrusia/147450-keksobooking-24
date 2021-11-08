@@ -40,22 +40,23 @@ const getAdsPhotos = (photos) => {
   return photosFragment;
 };
 
-export const createPopup = ({offer}) => {
+export const createPopup = (adsData) => {
   const adsElementFragment = document.createDocumentFragment();
   const adsElement = document.querySelector('#card').content.querySelector('.popup').cloneNode(true);
-  adsElement.querySelector('.popup__title').textContent = offer.title;
-  adsElement.querySelector('.popup__text--address').textContent = offer.address;
-  adsElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
-  adsElement.querySelector('.popup__type').textContent = getOfferType(offer.type);
-  adsElement.querySelector('.popup__text--capacity').textContent = `${getOfferRooms(offer.rooms)} для ${getOfferGuests(offer.guests)}`;
-  adsElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
+  adsElement.querySelector('.popup__avatar').src = adsData.author.avatar;
+  adsElement.querySelector('.popup__title').textContent = adsData.offer.title;
+  adsElement.querySelector('.popup__text--address').textContent = `${adsData.offer.address.lat}, ${adsData.offer.address.lng}`;
+  adsElement.querySelector('.popup__text--price').textContent = `${adsData.offer.price} ₽/ночь`;
+  adsElement.querySelector('.popup__type').textContent = getOfferType(adsData.offer.type);
+  adsElement.querySelector('.popup__text--capacity').textContent = `${getOfferRooms(adsData.offer.rooms)} для ${getOfferGuests(adsData.offer.guests)}`;
+  adsElement.querySelector('.popup__text--time').textContent = `Заезд после ${adsData.offer.checkin}, выезд до ${adsData.offer.checkout}`;
   const featuresContainer = adsElement.querySelector('.popup__features');
   featuresContainer.innerHTML = '';
-  featuresContainer.appendChild(getAdsFeatures(offer.features));
-  adsElement.querySelector('.popup__description').textContent = offer.description;
+  featuresContainer.appendChild(getAdsFeatures(adsData.offer.features));
+  adsElement.querySelector('.popup__description').textContent = adsData.offer.description;
   const photosContainer = adsElement.querySelector('.popup__photos');
   photosContainer.innerHTML = '';
-  photosContainer.appendChild(getAdsPhotos(offer.photos));
+  photosContainer.appendChild(getAdsPhotos(adsData.offer.photos));
   for (let index = 0; index < adsElement.children.length; index++) {
     if (!adsElement.children[index].innerHTML) {
       adsElement.children[index].remove();
