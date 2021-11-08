@@ -1,4 +1,4 @@
-import { AVATARS, TITLES, PRICE_MIN, PRICE_MAX, TYPES, ROOMS_MIN, ROOMS_MAX, GUESTS_MIN, GUESTS_MAX, CHECKINS, CHECKOUTS, FEATURES, DESCRIPTIONS, PHOTOS, LATITUDE_FROM, LATITUDE_TO, LONGITUDE_FROM, LONGITUDE_TO,  DIGITS_AFTER} from './ads-fake-data';
+import { AVATARS, TITLES, PRICE_MIN, PRICE_MAX, TYPES, ROOMS_MIN, ROOMS_MAX, GUESTS_MIN, GUESTS_MAX, CHECKINS, CHECKOUTS, FEATURES, DESCRIPTIONS, PHOTOS, LATITUDE_FROM, LATITUDE_TO, LONGITUDE_FROM, LONGITUDE_TO,  DIGITS_AFTER} from './data';
 
 import {getRandomPositiveFloat} from './get-random-positive-float';
 import {getRandomPositiveInteger} from './get-random-positive-integer';
@@ -35,7 +35,7 @@ const getOffer = () => (
   }
 );
 
-export const createAdd = () => (
+export const generateAddData = () => (
   {
     author: getAuthor(),
     offer: getOffer(),

@@ -1,8 +1,10 @@
-import {createAdd} from './utils/create-add';
+import {generateAddData} from './utils/generate-add-data';
+import {createPopup} from './utils/create-ads';
 
 const ADS_NUMBER = 10;
-
-// eslint-disable-next-line no-unused-vars
-const similarAds = Array.from({length: ADS_NUMBER}, createAdd);
+const adsData = Array.from({length: ADS_NUMBER}, generateAddData);
+const popup = createPopup(adsData[0]);
+const mapCanvas = document.querySelector('#map-canvas');
+mapCanvas.appendChild(popup);
 
 
