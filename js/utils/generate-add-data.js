@@ -1,10 +1,10 @@
-import { AVATARS, TITLES, PRICE_MIN, PRICE_MAX, TYPES, ROOMS_MIN, ROOMS_MAX, GUESTS_MIN, GUESTS_MAX, CHECKINS, CHECKOUTS, FEATURES, DESCRIPTIONS, PHOTOS, LATITUDE_FROM, LATITUDE_TO, LONGITUDE_FROM, LONGITUDE_TO,  DIGITS_AFTER} from './ads-fake-data';
+import { AVATARS, TITLES, PRICE_MIN, PRICE_MAX, TYPES, ROOMS_MIN, ROOMS_MAX, GUESTS_MIN, GUESTS_MAX, CHECKINS, CHECKOUTS, FEATURES, DESCRIPTIONS, PHOTOS, LATITUDE_FROM, LATITUDE_TO, LONGITUDE_FROM, LONGITUDE_TO,  DIGITS_AFTER} from './data.js';
 
-import {getRandomPositiveFloat} from './get-random-positive-float';
-import {getRandomPositiveInteger} from './get-random-positive-integer';
+import {getRandomPositiveFloat} from './get-random-positive-float.js';
+import {getRandomPositiveInteger} from './get-random-positive-integer.js';
 
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(1, elements.length - 1)];
-const getRangeRandomArrayElements = (elements) => elements.slice(0, getRandomArrayElement(elements));
+const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+const getRangeRandomArrayElements = (elements) => elements.slice(0, getRandomPositiveInteger(1, elements.length - 1));
 
 const getAuthor = () => (
   {
@@ -35,10 +35,12 @@ const getOffer = () => (
   }
 );
 
-export const createAdd = () => (
+const createAddData = () => (
   {
     author: getAuthor(),
     offer: getOffer(),
     location: getLocation(),
   }
 );
+
+export const generateAdsData = (adsNumber) => Array.from({length: adsNumber}, createAddData);
