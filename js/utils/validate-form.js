@@ -23,6 +23,8 @@ const formPrice = form.querySelector('#price');
 const formType = form.querySelector('#type');
 const formRoomNumber = form.querySelector('#room_number');
 const formCapacity = form.querySelector('#capacity');
+const formTimeIn = form.querySelector('#timein');
+const formTimeOut = form.querySelector('#timeout');
 
 formTitle.addEventListener('invalid', () => {
   if (formTitle.validity.valueMissing){
@@ -79,3 +81,6 @@ window.addEventListener('load', () => {
   numberOfGuest();
 });
 formRoomNumber.addEventListener('change', numberOfGuest);
+
+formTimeIn.addEventListener('change', () => formTimeOut.value = formTimeIn.value);
+formTimeOut.addEventListener('change', () => formTimeIn.value = formTimeOut.value);
