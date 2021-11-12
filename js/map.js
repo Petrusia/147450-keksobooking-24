@@ -13,13 +13,13 @@ const centerTokyo = {
 const mainPin = {
   width: 52,
   height: 52,
-  src: '../img/main-pin.svg',
+  src: './img/main-pin.svg',
 };
 
 const pin = {
   width: 40,
   height: 40,
-  src: '../img/pin.svg',
+  src: './img/pin.svg',
 };
 
 const address = document.querySelector('#address');
