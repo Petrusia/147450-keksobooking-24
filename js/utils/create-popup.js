@@ -45,7 +45,7 @@ export const createPopup = (adsData) => {
   const adsElement = document.querySelector('#card').content.querySelector('.popup').cloneNode(true);
   adsElement.querySelector('.popup__avatar').src = adsData.author.avatar;
   adsElement.querySelector('.popup__title').textContent = adsData.offer.title;
-  adsElement.querySelector('.popup__text--address').textContent = `${adsData.offer.address.lat}, ${adsData.offer.address.lng}`;
+  adsElement.querySelector('.popup__text--address').textContent = `${adsData.location.lat.toFixed(5)}, ${adsData.location.lng.toFixed(5)}`;
   adsElement.querySelector('.popup__text--price').textContent = `${adsData.offer.price} ₽/ночь`;
   adsElement.querySelector('.popup__type').textContent = getOfferType(adsData.offer.type);
   adsElement.querySelector('.popup__text--capacity').textContent = `${getOfferRooms(adsData.offer.rooms)} для ${getOfferGuests(adsData.offer.guests)}`;
