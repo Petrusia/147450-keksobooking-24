@@ -56,7 +56,7 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(mapCanvas);
 mainPinMarker.on('move', getPoint);
 
-const setDefaultMap = () => {
+export const setDefaultMap = () => {
   mainPinMarker.setLatLng({
     lat: centerTokyo.lat,
     lng: centerTokyo.lng,
@@ -65,6 +65,8 @@ const setDefaultMap = () => {
     lat: centerTokyo.lat,
     lng: centerTokyo.lng,
   }, ZOOM);
+  mapCanvas.closePopup();
+  address.value = `${centerTokyo.lat}, ${centerTokyo.lng}`;
 
 };
 resetBtn.addEventListener('click', setDefaultMap);
@@ -81,4 +83,7 @@ const createMarker = (element) => {
   L.marker({ lat, lng }, { icon }).addTo(mapCanvas).bindPopup(createPopup(element));
 };
 
-export const createMap = (adsData) => adsData.forEach(createMarker);
+export const createMap = (adsData) => {
+  setDefaultMap();
+  adsData.forEach(createMarker);
+};
