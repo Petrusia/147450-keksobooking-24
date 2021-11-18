@@ -145,6 +145,7 @@ export const createPointers = (adsData) => {
 };
 export const setFilterListener = (adsData) => {
   mapFilters.addEventListener('change', debounce(() => createPointers(adsData)));
+  mapFilters.addEventListener('reset', debounce(() => createPointers(adsData)));
 };
 
 
