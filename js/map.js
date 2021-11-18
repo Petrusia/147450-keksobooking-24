@@ -108,7 +108,7 @@ const price = mapFilters.querySelector('#housing-price');
 const rooms = mapFilters.querySelector('#housing-rooms');
 const guests = mapFilters.querySelector('#housing-guests');
 
-const filterByType = (advert) => type.value === 'any' || type.value === advert.offer.type;
+const filterByType = ({offer}) => (type.value === 'any' || type.value === offer.type);
 
 const filterByPrice = ({ offer }) => {
   switch (price.value) {
@@ -123,9 +123,9 @@ const filterByPrice = ({ offer }) => {
   }
 };
 
-const filterByRooms = ({offer}) => rooms.value === 'any' || Number(rooms.value) === offer.rooms;
+const filterByRooms = ({offer}) => (rooms.value === 'any' || Number(rooms.value) === offer.rooms);
 
-const filterByGuests = (advert) => guests.value === 'any' || Number(guests.value) === advert.offer.guests;
+const filterByGuests = ({offer}) => (guests.value === 'any' || Number(guests.value) === offer.guests);
 const filterByFeatures = ({offer}) => {
   const features = offer.features || [];
   const featuresChecked = mapFilters.querySelectorAll('.map__checkbox:checked');

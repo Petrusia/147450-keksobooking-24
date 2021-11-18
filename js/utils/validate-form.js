@@ -82,5 +82,9 @@ window.addEventListener('load', () => {
 });
 formRoomNumber.addEventListener('change', numberOfGuest);
 
-formTimeIn.addEventListener('change', () => formTimeOut.value = formTimeIn.value);
-formTimeOut.addEventListener('change', () => formTimeIn.value = formTimeOut.value);
+formTimeIn.addEventListener('change', () => {
+  formTimeOut.value = formTimeIn.value;
+});
+formTimeOut.addEventListener('change', () => {
+  formTimeIn.value = formTimeOut.value;
+});
