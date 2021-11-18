@@ -22,7 +22,7 @@ const formTitle = form.querySelector('#title');
 const formPrice = form.querySelector('#price');
 const formType = form.querySelector('#type');
 const formRoomNumber = form.querySelector('#room_number');
-const formCapacity = form.querySelector('#capacity');
+const formRoomCapacity = form.querySelector('#capacity');
 const formTimeIn = form.querySelector('#timein');
 const formTimeOut = form.querySelector('#timeout');
 
@@ -72,15 +72,26 @@ formPrice.addEventListener('input', (evt) => {
 
 const numberOfGuest = () => {
   const availableValues = guestRoomOptions[+formRoomNumber.value];
-  Array.from(formCapacity.options).forEach((option) => {
+  Array.from(formRoomCapacity.options).forEach((option) => {
     option.disabled = !availableValues.includes(+option.value);
   });
 };
 
+const numbersOfRooms = function () {
+  const availableValues = guestRoomOptions[+formRoomNumber.value];
+  if (!availableValues.includes(+formRoomCapacity.value)) {
+    formRoomCapacity.setCustomValidity('Многовато вас или что то не так ');
+  } else {
+    formRoomCapacity.setCustomValidity('');
+  }
+};
+
 window.addEventListener('load', () => {
   numberOfGuest();
+  numbersOfRooms();
 });
 formRoomNumber.addEventListener('change', numberOfGuest);
+formRoomNumber.addEventListener('change', numbersOfRooms);
 
 formTimeIn.addEventListener('change', () => {
   formTimeOut.value = formTimeIn.value;

@@ -32,10 +32,10 @@ const mapFilters = document.querySelector('.map__filters');
 
 deactivatePage();
 
-function getPoint(evt) {
+const getPoint = (evt) => {
   const { lat, lng } = evt.target.getLatLng();
   address.value = `${lat.toFixed(DIGITS_AFTER)}, ${lng.toFixed(DIGITS_AFTER)}`;
-}
+};
 
 const mainPinIcon = L.icon({
   iconUrl: mainPin.src,
