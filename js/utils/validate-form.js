@@ -70,14 +70,14 @@ formPrice.addEventListener('input', (evt) => {
 });
 
 
-const numberOfGuest = () => {
+const validateNumberOfGuest = () => {
   const availableValues = guestRoomOptions[+formRoomNumber.value];
   Array.from(formRoomCapacity.options).forEach((option) => {
     option.disabled = !availableValues.includes(+option.value);
   });
 };
 
-const numbersOfRooms = function () {
+const validateNumbersOfRooms = function () {
   const availableValues = guestRoomOptions[+formRoomNumber.value];
   if (!availableValues.includes(+formRoomCapacity.value)) {
     formRoomCapacity.setCustomValidity('Многовато вас или что то не так ');
@@ -87,11 +87,11 @@ const numbersOfRooms = function () {
 };
 
 window.addEventListener('load', () => {
-  numberOfGuest();
-  numbersOfRooms();
+  validateNumberOfGuest();
+  validateNumbersOfRooms();
 });
-formRoomNumber.addEventListener('change', numberOfGuest);
-formRoomNumber.addEventListener('change', numbersOfRooms);
+formRoomNumber.addEventListener('change', validateNumberOfGuest);
+formRoomNumber.addEventListener('change', validateNumbersOfRooms);
 
 formTimeIn.addEventListener('change', () => {
   formTimeOut.value = formTimeIn.value;
