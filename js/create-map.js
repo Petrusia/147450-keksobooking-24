@@ -1,6 +1,7 @@
 import { activatePage, deactivatePage } from './utils/forms.js';
 import { createPopup } from './utils/create-popup.js';
 import {debounce} from './utils/debounce.js';
+import {clearPreviews} from './preview-img.js';
 
 const AMOUNT = 10;
 const DIGITS_AFTER = 5;
@@ -90,6 +91,7 @@ resetBtn.addEventListener('click', (evt) => {
   evt.preventDefault();
   mapFilters.reset();
   resetMap();
+  clearPreviews();
 });
 
 const createMarker = (element) => {
