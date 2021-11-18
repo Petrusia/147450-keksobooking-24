@@ -143,4 +143,8 @@ export const createPointers = (adsData) => {
   adsData.filter(filteredAdsData).slice(0, AMOUNT).forEach((data) => createMarker(data));
   mapFilters.addEventListener('change', debounce(() => createPointers(adsData)));
 };
+export const setFilterListener = (adsData) => {
+  mapFilters.addEventListener('change', debounce(() => createPointers(adsData)));
+};
+
 
