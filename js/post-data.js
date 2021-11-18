@@ -3,7 +3,6 @@ const POST_API_URL = 'https://24.javascript.pages.academy/keksobooking';
 const body = document.querySelector('body');
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
-const address = adForm.querySelector('#address');
 
 const renderMessageTemplate = (messageId) => {
 
