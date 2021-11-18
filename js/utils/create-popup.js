@@ -20,6 +20,7 @@ export const createPopup = ({author, location, offer}) => {
   const adsElement = document.querySelector('#card').content.querySelector('.popup').cloneNode(true);
   adsElement.querySelector('.popup__avatar').src = author.avatar;
   adsElement.querySelector('.popup__title').textContent = offer.title;
+  adsElement.querySelector('.popup__description').textContent = offer.description;
   adsElement.querySelector('.popup__text--address').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
   adsElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   adsElement.querySelector('.popup__type').textContent = getOfferType(offer.type);

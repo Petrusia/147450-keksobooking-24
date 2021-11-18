@@ -9,7 +9,7 @@ const ZERO_PRICE = 0;
 const MIDDLE_PRICE = 10000;
 const HIGH_PRICE = 50000;
 
-const centerTokyo = {
+export const centerTokyo = {
   lat: 35.68488,
   lng: 139.75297,
 };
@@ -73,7 +73,7 @@ export const createMap = (onLoad) => {
 };
 
 
-export const setDefaultMap = () => {
+export const resetMap = () => {
   mainPinMarker.setLatLng({
     lat: centerTokyo.lat,
     lng: centerTokyo.lng,
@@ -88,7 +88,8 @@ export const setDefaultMap = () => {
 };
 resetBtn.addEventListener('click', () => {
   mapFilters.reset();
-  setDefaultMap();
+  resetMap();
+  address.value = `${centerTokyo.lat}, ${centerTokyo.lng}`;
 });
 
 const createMarker = (element) => {

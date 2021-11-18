@@ -1,23 +1,27 @@
-import {setDefaultMap} from './map.js';
+import {resetMap} from './map.js';
 const POST_API_URL = 'https://24.javascript.pages.academy/keksobooking';
 const body = document.querySelector('body');
 const adForm = document.querySelector('.ad-form');
-const successTemplate = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
-const errorTemplate = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
 const mapFilters = document.querySelector('.map__filters');
+const address = adForm.querySelector('#address');
 
-const isEscKey = (evt) => evt.key === 'Escape' || evt.key === 'Esc' ;
+const renderMessageTemplate = (messageId) => {
 
-const renderMessageTemplate = (element) => {
-  body.appendChild(element);
-  document.addEventListener('keydown',(evt) => {
-    if (isEscKey(evt)) {
-      element.remove();
+  const messageTemplate = document.querySelector(`#${messageId}`).content;
+  const messageElement = messageTemplate.firstElementChild.cloneNode(true);
+  const onEscPress = (evt) => {
+    if (evt.key === 'Escape') {
+      messageElement.remove();
+      window.removeEventListener('keydown', onEscPress);
     }
-  });
-  element.addEventListener('click', () => {
-    element.remove();
-  });
+  };
+  const onMessagePress = () => {
+    messageElement.remove();
+    window.removeEventListener('keydown', onEscPress);
+  };
+  messageElement.addEventListener('click', onMessagePress);
+  window.addEventListener('keydown', onEscPress);
+  body.appendChild(messageElement);
 };
 
 export const postData = () => {
@@ -28,16 +32,16 @@ export const postData = () => {
     fetch( POST_API_URL, { method: 'POST', body: formData })
       .then((response) => {
         if (response.ok) {
-          renderMessageTemplate(successTemplate);
+          renderMessageTemplate('success');
           adForm.reset();
           mapFilters.reset();
-          setDefaultMap();
+          resetMap();
         } else {
-          renderMessageTemplate(errorTemplate);
+          renderMessageTemplate('error');
         }
       })
       .catch(() => {
-        renderMessageTemplate(errorTemplate);
+        renderMessageTemplate('error');
       });
   });
 };
