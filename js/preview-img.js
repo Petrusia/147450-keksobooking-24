@@ -27,6 +27,7 @@ const setPhotoPreview = () => {
     const img = document.createElement('img');
     img.width = 70;
     img.height = 70;
+    img.style.borderRadius = '7px';
     img.src = URL.createObjectURL(file);
     photosPreview.appendChild(img);
   } else {
