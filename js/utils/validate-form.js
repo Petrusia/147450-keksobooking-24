@@ -80,7 +80,7 @@ const validateNumberOfGuest = () => {
 const validateNumbersOfRooms = function () {
   const availableValues = guestRoomOptions[+formRoomNumber.value];
   if (!availableValues.includes(+formRoomCapacity.value)) {
-    formRoomCapacity.setCustomValidity('Многовато вас или  маловато, сделайте другой выбор :)');
+    formRoomCapacity.setCustomValidity('сделайте другой выбор :)');
   } else {
     formRoomCapacity.setCustomValidity('');
   }
