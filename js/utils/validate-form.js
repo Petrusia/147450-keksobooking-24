@@ -84,14 +84,14 @@ const validateNumbersOfRooms = function () {
   } else {
     formRoomCapacity.setCustomValidity('');
   }
+  formRoomCapacity.reportValidity();
 };
 
 window.addEventListener('load', () => {
   validateNumberOfGuest();
-  validateNumbersOfRooms();
 });
 formRoomNumber.addEventListener('change', validateNumberOfGuest);
-formRoomNumber.addEventListener('change', validateNumbersOfRooms);
+formRoomCapacity.addEventListener('change', validateNumbersOfRooms);
 
 formTimeIn.addEventListener('change', () => {
   formTimeOut.value = formTimeIn.value;
