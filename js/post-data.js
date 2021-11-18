@@ -1,5 +1,5 @@
 import {setDefaultMap} from './map.js';
-const ERROR_SHOW_TIME = 3000;
+const MESSAGE_SHOW_TIME = 3000;
 const POST_API_URL = 'https://24.javascript.pages.academy/keksobooking';
 const body = document.querySelector('body');
 const adForm = document.querySelector('.ad-form');
@@ -21,7 +21,7 @@ const renderMessageTemplate = (element) => {
   });
   setTimeout(() => {
     element.remove();
-  }, ERROR_SHOW_TIME);
+  }, MESSAGE_SHOW_TIME);
 
 };
 

@@ -1,9 +1,13 @@
 import { activatePage, deactivatePage } from './utils/forms.js';
 import { createPopup } from './utils/create-popup.js';
+import {debounce} from './utils/debounce.js';
 
-
+const AMOUNT = 10;
 const DIGITS_AFTER = 5;
 const ZOOM = 12;
+const ZERO_PRICE = 0;
+const MIDDLE_PRICE = 10000;
+const HIGH_PRICE = 50000;
 
 const centerTokyo = {
   lat: 35.68488,
@@ -24,18 +28,9 @@ const pin = {
 
 const address = document.querySelector('#address');
 const resetBtn = document.querySelector('.ad-form__reset');
-
+const mapFilters = document.querySelector('.map__filters');
 
 deactivatePage();
-
-const mapCanvas = L.map('map-canvas')
-  .on('load', () => {activatePage();})
-  .setView({
-    lat: centerTokyo.lat,
-    lng: centerTokyo.lng,
-  }, ZOOM);
-
-L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',{attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(mapCanvas);
 
 function getPoint(evt) {
   const { lat, lng } = evt.target.getLatLng();
@@ -53,8 +48,30 @@ const mainPinMarker = L.marker(
   {draggable: true, icon: mainPinIcon},
 );
 
-mainPinMarker.addTo(mapCanvas);
-mainPinMarker.on('move', getPoint);
+let mapCanvas;
+let markerGroup;
+
+export const createMap = (onLoad) => {
+  mapCanvas = L.map('map-canvas')
+    .on('load', () => {
+      onLoad();
+      activatePage();
+    }).setView({
+      lat: centerTokyo.lat,
+      lng: centerTokyo.lng,
+    }, ZOOM);
+  address.value = `${centerTokyo.lat}, ${centerTokyo.lng}`;
+  markerGroup = L.layerGroup().addTo(mapCanvas);
+  mainPinMarker.addTo(mapCanvas);
+  mainPinMarker.on('move', getPoint);
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(mapCanvas);
+};
+
 
 export const setDefaultMap = () => {
   mainPinMarker.setLatLng({
@@ -69,7 +86,10 @@ export const setDefaultMap = () => {
   address.value = `${centerTokyo.lat}, ${centerTokyo.lng}`;
 
 };
-resetBtn.addEventListener('click', setDefaultMap);
+resetBtn.addEventListener('click', () => {
+  mapFilters.reset();
+  setDefaultMap();
+});
 
 const createMarker = (element) => {
   const { lat, lng } = element.location;
@@ -80,10 +100,43 @@ const createMarker = (element) => {
     iconAnchor: [pin.width / 2, pin.height],
   });
 
-  L.marker({ lat, lng }, { icon }).addTo(mapCanvas).bindPopup(createPopup(element));
+  return L.marker({ lat, lng }, { icon }).addTo( markerGroup).bindPopup(createPopup(element));
 };
 
-export const createMap = (adsData) => {
-  setDefaultMap();
-  adsData.forEach(createMarker);
+const type = mapFilters.querySelector('#housing-type');
+const price = mapFilters.querySelector('#housing-price');
+const rooms = mapFilters.querySelector('#housing-rooms');
+const guests = mapFilters.querySelector('#housing-guests');
+
+const filterByType = (advert) => type.value === 'any' || type.value === advert.offer.type;
+
+const filterByPrice = ({ offer }) => {
+  switch (price.value) {
+    case 'low':
+      return offer.price > ZERO_PRICE && offer.price < MIDDLE_PRICE;
+    case 'middle':
+      return offer.price >= MIDDLE_PRICE && offer.price <= HIGH_PRICE;
+    case 'high':
+      return offer.price > HIGH_PRICE;
+    default:
+      return true;
+  }
+};
+
+const filterByRooms = ({offer}) => rooms.value === 'any' || Number(rooms.value) === offer.rooms;
+
+const filterByGuests = (advert) => guests.value === 'any' || Number(guests.value) === advert.offer.guests;
+const filterByFeatures = ({offer}) => {
+  const features = offer.features || [];
+  const featuresChecked = mapFilters.querySelectorAll('.map__checkbox:checked');
+  const featuresSelected = Array.from(featuresChecked).map((input) => input.value);
+  return featuresSelected.every((element) => features.includes(element));
+};
+
+const filteredAdsData = (adsData) => filterByType(adsData) && filterByPrice(adsData) && filterByRooms(adsData) && filterByGuests(adsData) && filterByFeatures(adsData);
+
+export const createPointers = (adsData) => {
+  markerGroup.clearLayers();
+  adsData.filter(filteredAdsData).slice(0, AMOUNT).forEach((data) => createMarker(data));
+  mapFilters.addEventListener('change', debounce(() => createPointers(adsData)));
 };
