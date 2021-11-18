@@ -86,10 +86,10 @@ export const resetMap = () => {
   address.value = `${centerTokyo.lat}, ${centerTokyo.lng}`;
 
 };
-resetBtn.addEventListener('click', () => {
+resetBtn.addEventListener('click', (evt) => {
+  evt.preventDefault();
   mapFilters.reset();
   resetMap();
-  address.value = `${centerTokyo.lat}, ${centerTokyo.lng}`;
 });
 
 const createMarker = (element) => {
