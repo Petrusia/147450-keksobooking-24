@@ -1,5 +1,4 @@
 import {setDefaultMap} from './map.js';
-const MESSAGE_SHOW_TIME = 3000;
 const POST_API_URL = 'https://24.javascript.pages.academy/keksobooking';
 const body = document.querySelector('body');
 const adForm = document.querySelector('.ad-form');
@@ -19,10 +18,6 @@ const renderMessageTemplate = (element) => {
   element.addEventListener('click', () => {
     element.remove();
   });
-  setTimeout(() => {
-    element.remove();
-  }, MESSAGE_SHOW_TIME);
-
 };
 
 export const postData = () => {
