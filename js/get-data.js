@@ -3,12 +3,7 @@ const ERROR_MESSAGE = 'Ошибка загрузки данных';
 const GET_API_URL = 'https://24.javascript.pages.academy/keksobooking/data';
 
 export const getData = (onSuccess) => {
-  fetch(
-    GET_API_URL,
-    {
-      method: 'GET',
-    },
-  )
+  fetch(GET_API_URL, { method: 'GET'})
     .then((res) => {
       if (!res.ok) {
         throw new Error(ERROR_MESSAGE);
