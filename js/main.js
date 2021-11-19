@@ -1,9 +1,15 @@
-import {getData} from './get-data.js';
-import {createMap} from './map.js';
+
+import {createPointers, createMap, setFilterListener} from './create-map.js';
 import {postData} from './post-data.js';
+import {getData} from './get-data.js';
 import './utils/validate-form.js';
+import {setAllPreviews} from './preview-img.js';
 
-const AMOUNT = 10;
-
-getData().then((data) => createMap(data.slice(0, AMOUNT)));
+createMap(() => {
+  getData((adsData) => {
+    createPointers(adsData);
+    setFilterListener(adsData);
+  });
+});
 postData();
+setAllPreviews();
