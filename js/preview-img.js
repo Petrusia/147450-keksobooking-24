@@ -24,9 +24,8 @@ const setPhotoPreview = () => {
   const file = photoInput.files[0];
   const matches = FILE_TYPES.includes(file.type);
   if (matches) {
-    const img = document.createElement('img');
-    img.width = 70;
-    img.height = 70;
+    const img = new Image(70,  70);
+    img.style.border = '10px solid orange';
     img.style.borderRadius = '7px';
     img.src = URL.createObjectURL(file);
     photosPreview.appendChild(img);
